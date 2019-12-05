@@ -2,4 +2,6 @@
 # Данный GITIGNORE-файл был автоматически создан Microsoft(R) Visual Studio.
 ################################################################################
 
-/Character Manager/bin/Debug
+/Character Manager/bin
+/Character Manager/obj
+/Character Manager/packages
