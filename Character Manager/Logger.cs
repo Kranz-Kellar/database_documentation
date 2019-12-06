@@ -25,6 +25,9 @@ namespace CharacterManager
         {
             logFileName = newName;
         }
+
+        
+
     }
 
     public enum LogStatus
