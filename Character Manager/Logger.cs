@@ -9,7 +9,7 @@ namespace CharacterManager
 {
     public class Logger
     {
-        static private string logFileName = "";
+        static private string logFileName = "log.txt";
 
         static public void Log(LogStatus status, string msg)
         {
@@ -19,6 +19,11 @@ namespace CharacterManager
         static private string GetFormattedLogStatusString(LogStatus status)
         {
             return $"[{status.ToString()}]";
+        }
+        
+        static public void SetLogFileName(string newName)
+        {
+            logFileName = newName;
         }
     }
 

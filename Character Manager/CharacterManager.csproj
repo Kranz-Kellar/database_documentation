@@ -51,8 +51,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Character.cs" />
-    <Compile Include="Cornucopia.cs" />
+    <Compile Include="Data\Character.cs" />
+    <Compile Include="Data\Cornucopia.cs" />
     <Compile Include="DBHandler.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
@@ -61,7 +61,7 @@
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="Logger.cs" />
-    <Compile Include="PersonalIsland.cs" />
+    <Compile Include="Data\PersonalIsland.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
