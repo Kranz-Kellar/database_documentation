@@ -12,7 +12,7 @@ namespace CharacterManager
     public class DBHandler
     {
         static private string databaseFileName = "database.sqlite";
-        static private string connectionString = "";
+        static private string connectionString = $"Data Source = {databaseFileName}";
         
         static private bool IsDataBaseExists()
         {
@@ -47,7 +47,7 @@ namespace CharacterManager
             }
             catch(Exception ex)
             {
-
+                Logger.Log(LogStatus.ERROR, $"ExecuteQeuryWithDataToReturn failed with message {ex.Message}");
                 return new DataTable();
             }
         }
@@ -65,7 +65,7 @@ namespace CharacterManager
             }
             catch(Exception ex)
             {
-
+                Logger.Log(LogStatus.ERROR, $"ExecuteQuery failed with message {ex.Message}");
             }
         }
     }
