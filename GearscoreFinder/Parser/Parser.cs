@@ -12,31 +12,10 @@ namespace CharacterManager
 {
     public class Parser
     {
-        static private string allodsArmoryAddress = $"http://armory.allodswiki.ru";
-
-        static public void Init()
-        {
-
-        }
-
-        static public string GetGearScoreOfPlayer(string characterName, string serverName)
-        {
-            string translitServer = TransliterationHandler.RussianToEnglish(serverName.ToLower().Trim());
-            string translitName = TransliterationHandler.RussianToEnglish(characterName.ToLower().Trim());
-            var pageOfArmoryAllods = LoadPage($"{allodsArmoryAddress}/avatar/{translitServer}/{translitName}".ToLower());
-            var document = new HtmlDocument();
-            document.LoadHtml(pageOfArmoryAllods);
-
-            HtmlNodeCollection links = document.DocumentNode.SelectNodes(".//div[@class='font-weight-bold avatar-gearscore']");
-            if(links == null)
-            {
-                return "Гирскор не найден";
-            }
-            return links[0].InnerText;
-        }
 
         static private string LoadPage(string url)
         {
+
             var result = "";
             var request = (HttpWebRequest)WebRequest.Create(url);
             var response = (HttpWebResponse)request.GetResponse();
@@ -59,9 +38,38 @@ namespace CharacterManager
             return result;
         }
 
-        static public string FindElement(string XElement)
+        static public string FindElement(string page, string XPath)
         {
-            return "";
+            var pageOfArmoryAllods = LoadPage(page.ToLower());
+            var document = new HtmlDocument();
+            document.LoadHtml(pageOfArmoryAllods);
+
+            HtmlNodeCollection items = document.DocumentNode.SelectNodes(XPath);
+            if (items == null)
+            {
+                return "Элемент не найден.";
+            }
+            return items[0].InnerText;
+        }
+
+        static public List<string> FindListOfElements(string page, string XPath)
+        {
+            var pageOfArmoryAllods = LoadPage(page.ToLower());
+            var document = new HtmlDocument();
+            document.LoadHtml(pageOfArmoryAllods);
+
+            HtmlNodeCollection items = document.DocumentNode.SelectNodes(XPath);
+            if (items == null)
+            {
+                throw new Exception($"Page {page} with XPath {XPath} not found");
+            }
+            var result = new List<string>();
+            foreach(var item in items)
+            {
+                result.Add(item.InnerText);
+            }
+
+            return result;
         }
     }
 }

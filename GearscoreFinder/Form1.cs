@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CharacterManager;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -15,6 +16,49 @@ namespace GearscoreFinder
         public Form1()
         {
             InitializeComponent();
+        }
+
+        private void FindPlayer_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var gearScore = GearScoreParser.GetGearScoreOfPlayer(nicknameOfPlayerToFind.Text, serverOfPlayerToFind.Text);
+                playerList.Items.Add($"{nicknameOfPlayerToFind.Text} - {gearScore}");
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show("Персонаж не был найден");
+                Logger.Log(LogStatus.ERROR, $"{DateTime.Now} : {ex.Message}");
+            }
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            try
+            {
+                ViewAvailableServers();
+                TransliterationHandler.Init();
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show("Непредвиденная ошибка. Подробности в логе");
+                Logger.Log(LogStatus.ERROR, $"{DateTime.Now} : {ex.Message}");
+            }
+        }
+
+        private void ViewAvailableServers()
+        {
+            var serverList = GearScoreParser.GetAvailableServers();
+            foreach(var server in serverList)
+            {
+                serverOfPlayerToFind.Items.Add(server);
+            }
+            serverOfPlayerToFind.SelectedIndex = 0;
+        }
+
+        private void ClearPlayerList_Click(object sender, EventArgs e)
+        {
+            playerList.Items.Clear();
         }
     }
 }
