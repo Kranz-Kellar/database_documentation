@@ -12,5 +12,7 @@ namespace CharacterManager
         public DateTime StartOfProduction { get; set; }
         public int AmountDaysOfProduction { get; set; }
         public string Product { get; set; }
+        public bool isWorking { get; set; }
+        
     }
 }

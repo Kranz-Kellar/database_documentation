@@ -15,6 +15,8 @@ namespace CharacterManager
         public Form1()
         {
             InitializeComponent();
+            Parser.Parser.Init();
+            MessageBox.Show(Parser.Parser.GetGearScoreOfPlayer("Крэнц", "Молодая гвардия"));
         }
     }
 }
