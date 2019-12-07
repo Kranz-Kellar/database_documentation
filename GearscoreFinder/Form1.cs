@@ -36,6 +36,7 @@ namespace GearscoreFinder
         {
             try
             {
+                LoadLastSession();
                 ViewAvailableServers();
                 TransliterationHandler.Init();
             }
@@ -59,6 +60,30 @@ namespace GearscoreFinder
         private void ClearPlayerList_Click(object sender, EventArgs e)
         {
             playerList.Items.Clear();
+        }
+
+        private void LoadLastSession()
+        {
+            var playersData = SessionHandler.LoadLastSession();
+            foreach(var data in playersData)
+            {
+                playerList.Items.Add(data);
+            }
+        }
+
+        private void SaveLastSession()
+        {
+            var playersData = new List<string>();
+            for(int i = 0; i < playerList.Items.Count; i++)
+            {
+                playersData.Add(playerList.Items[i].ToString());
+            }
+            SessionHandler.SaveLastSession(playersData);
+        }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            SaveLastSession();
         }
     }
 }

@@ -13,7 +13,7 @@ namespace CharacterManager
 
         static public void Log(LogStatus status, string msg)
         {
-            File.AppendAllText(logFileName, $"{GetFormattedLogStatusString(status)} [{msg}]");
+            File.AppendAllText(logFileName, $"{GetFormattedLogStatusString(status)} [{msg}]{Environment.NewLine}");
         }
 
         static private string GetFormattedLogStatusString(LogStatus status)
