@@ -9,7 +9,7 @@ namespace GearscoreFinder
 {
     public class SessionHandler
     {
-        static private string sessionFileName = "session.res";
+        static private string sessionFileName = "session.dat";
         static public List<string> LoadLastSession()
         {
             if(!File.Exists(sessionFileName))
